@@ -4,6 +4,10 @@ public class Temperatura {
 	
 
 	private double celsius;
+	
+	//testando
+	private double kelvin;
+	private double fahreinheit;
 
 	public double getCelsius() {
 			return celsius;
@@ -15,8 +19,9 @@ public class Temperatura {
 	
 	public double converterParaKelvin() {
 	
-	double kelvin = celsius + 273.15;
-	return kelvin;
+		//testando, voltar para igual o fahreinheit depois
+	 kelvin = celsius + 273.15;
+	return this.kelvin;
 	
 	}
 	
@@ -26,7 +31,8 @@ public class Temperatura {
 	}
 	
 	public void exibirDados() {
-		System.out.println();
+		System.out.println(fahreinheit);
+		System.out.println(kelvin);
 	}
 	
 }

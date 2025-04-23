@@ -6,10 +6,13 @@ public class TemperaturaApp {
 
 	public static void main(String[] args) {
 		
+		
+		//testando
 		Temperatura temperatura = new Temperatura();
 		temperatura.setCelsius(30);
 		temperatura.converterParaFahreinheit();
 		temperatura.converterParaKelvin();
+		temperatura.exibirDados();
 		
 		
 
