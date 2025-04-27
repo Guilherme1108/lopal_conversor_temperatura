@@ -1,23 +1,13 @@
 package br.dev.guilherme.temperatura;
 
-import br.dev.guilherme.temperatura.model.Temperatura;
+import br.dev.guilherme.temperatura.gui.TelaConversor;
 
 public class TemperaturaApp {
 
 	public static void main(String[] args) {
 		
-		
-		//testando
-		Temperatura temperatura = new Temperatura();
-		temperatura.setCelsius(30);
-		temperatura.converterParaFahreinheit();
-		temperatura.converterParaKelvin();
-		temperatura.exibirDados();
-		
-		
-
-		
-
+		TelaConversor tela = new TelaConversor();
+		tela.criarTelaConversor();
 	}
 
 }
