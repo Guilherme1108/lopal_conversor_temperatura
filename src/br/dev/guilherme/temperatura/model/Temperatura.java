@@ -11,7 +11,7 @@ public class Temperatura {
 	public void setCelsius(double celsius) {
 		this.celsius = celsius;
 	}
-	
+
 	// realizando o calculo de celcius para kelvin
 	public double converterParaKelvin() {
 		double kelvin = getCelsius() + 273.15;
