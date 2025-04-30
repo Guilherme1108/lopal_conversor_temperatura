@@ -9,8 +9,11 @@ public class Temperatura {
 	}
 
 	public void setCelsius(double celsius) {
-		this.celsius = celsius;
-	}
+		
+		if (celsius >= 273.15) {
+			this.celsius = celsius;
+		}
+		}
 
 	// realizando o calculo de celcius para kelvin
 	public double converterParaKelvin() {

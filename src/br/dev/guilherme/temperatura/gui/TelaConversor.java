@@ -23,6 +23,7 @@ public class TelaConversor {
 
 	private JLabel labelResultado;
 	private JLabel labelMensagemErro;
+	private JLabel labelMensagemErro1;
 
 	public void criarTelaConversor() {
 
@@ -71,7 +72,17 @@ public class TelaConversor {
 		labelMensagemErro.setVisible(false); // Define que não é visivel no momento
 		labelMensagemErro.setForeground(Color.RED); // Define a cor da letra
 		labelMensagemErro.setFont(tamanhoFonteMensagemErro); // faz o a mensagem de erro utilizar a fonte
-		labelMensagemErro.setBounds(75, 180, 260, 50);
+		labelMensagemErro.setBounds(75, 190, 280, 50);
+		
+		labelMensagemErro1 = new JLabel("Utilize somente números e pontos."); //mensagem de erro da linha de baixo
+		// configurando a mensagem de erro de baixo
+		Font tamanhoFonteMensagemErro1 = new Font(null, Font.BOLD, 20); // Cria uma estilização de fonte
+		labelMensagemErro1.setVisible(false); // Define que não é visivel no momento
+		labelMensagemErro1.setForeground(Color.RED); // Define a cor da letra
+		labelMensagemErro1.setFont(tamanhoFonteMensagemErro1); // faz o a mensagem de erro utilizar a fonte
+		labelMensagemErro1.setBounds(20, 215, 365, 50);
+		
+		
 
 		// Adicionando os componentes no painel de conteúdo do JFrame (tela)
 		container.add(labelCelsius);
@@ -80,6 +91,7 @@ public class TelaConversor {
 		container.add(buttonFahreinheit);
 		container.add(labelResultado);
 		container.add(labelMensagemErro);
+		container.add(labelMensagemErro1);
 
 		buttonKelvin.addActionListener(new ActionListener() {
 
@@ -94,13 +106,8 @@ public class TelaConversor {
 
 				try {
 
-					labelMensagemErro.setVisible(false);
 
-					String celsius = textCelsius.getText().replace(",",
-							"."); /*
-									 * o replace serve para mudar a virgula por um . porque se não o calculo da
-									 * errado
-									 */
+					String celsius = textCelsius.getText();
 					// criando uma variavel para guardar o valor em double
 					double celsiusDouble = Double.parseDouble(celsius);
 
@@ -116,11 +123,19 @@ public class TelaConversor {
 					 * passa o resultado para o labelResultado 
 					 * o %.2f serve para deixa o resultado com apenas 2 casas decimais
 					 */
-					labelResultado.setText(String.format("%.2f", temperaturaKelvin) + " Kelvin");
-					labelResultado.setBounds(120, 180, 360, 50);
+					if (temperatura.getCelsius() >= 273.15) {
+						
+						labelResultado.setText(String.format("%.2f", temperaturaKelvin) + " Kelvin");
+						labelResultado.setBounds(120, 180, 360, 50);
 
-					// torna o resultado visivel
-					labelResultado.setVisible(true);
+						// torna o resultado visivel
+						labelResultado.setVisible(true);
+						
+						
+					} else { labelMensagemErro.setText("O valor deve ser acima ou igual a -273.15");
+						labelMensagemErro.setVisible(true);
+					}
+
 
 					// se for falso (erro)
 				} catch (NumberFormatException exception) {
@@ -130,6 +145,7 @@ public class TelaConversor {
 
 					// faz aparecer a mensagem de erro
 					labelMensagemErro.setVisible(true);
+					labelMensagemErro1.setVisible(true);
 
 				}
 
@@ -145,9 +161,8 @@ public class TelaConversor {
 
 				try {
 
-					labelMensagemErro.setVisible(false);
 
-					String celsius = textCelsius.getText().replace(",", ".");
+					String celsius = textCelsius.getText();
 					double celsiusDouble = Double.parseDouble(celsius);
 
 					Temperatura temperatura = new Temperatura();
@@ -162,6 +177,7 @@ public class TelaConversor {
 
 					labelResultado.setVisible(false);
 					labelMensagemErro.setVisible(true);
+					labelMensagemErro1.setVisible(true);
 
 				}
 			}
