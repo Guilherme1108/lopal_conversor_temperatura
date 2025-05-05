@@ -19,7 +19,7 @@ public class TelaConversor {
 	private JLabel labelCelsius;
 
 	private JButton buttonKelvin;
-	private JButton buttonFahreinheit;
+	private JButton buttonFahrenheit;
 
 	private JLabel labelResultado;
 	private JLabel labelMensagemErro;
@@ -51,10 +51,10 @@ public class TelaConversor {
 		buttonKelvin.setText("Kelvin");
 		buttonKelvin.setBounds(50, 100, 140, 50);
 
-		// botão para converter para Fahreinheit
-		buttonFahreinheit = new JButton();
-		buttonFahreinheit.setText("Fahreinheit");
-		buttonFahreinheit.setBounds(210, 100, 140, 50);
+		// botão para converter para Fahrenheit
+		buttonFahrenheit = new JButton();
+		buttonFahrenheit.setText("Fahrenheit");
+		buttonFahrenheit.setBounds(210, 100, 140, 50);
 
 		// cria o resultado que irá aparecer
 		labelResultado = new JLabel();
@@ -73,22 +73,20 @@ public class TelaConversor {
 		labelMensagemErro.setForeground(Color.RED); // Define a cor da letra
 		labelMensagemErro.setFont(tamanhoFonteMensagemErro); // faz o a mensagem de erro utilizar a fonte
 		labelMensagemErro.setBounds(75, 190, 280, 50);
-		
-		labelMensagemErro1 = new JLabel("Utilize somente números e pontos."); //mensagem de erro da linha de baixo
+
+		labelMensagemErro1 = new JLabel("Utilize somente números e pontos."); // mensagem de erro da linha de baixo
 		// configurando a mensagem de erro de baixo
 		Font tamanhoFonteMensagemErro1 = new Font(null, Font.BOLD, 20); // Cria uma estilização de fonte
 		labelMensagemErro1.setVisible(false); // Define que não é visivel no momento
 		labelMensagemErro1.setForeground(Color.RED); // Define a cor da letra
 		labelMensagemErro1.setFont(tamanhoFonteMensagemErro1); // faz o a mensagem de erro utilizar a fonte
-		labelMensagemErro1.setBounds(20, 215, 365, 50);
-		
-		
+		labelMensagemErro1.setBounds(40, 215, 330, 50);
 
 		// Adicionando os componentes no painel de conteúdo do JFrame (tela)
 		container.add(labelCelsius);
 		container.add(textCelsius);
 		container.add(buttonKelvin);
-		container.add(buttonFahreinheit);
+		container.add(buttonFahrenheit);
 		container.add(labelResultado);
 		container.add(labelMensagemErro);
 		container.add(labelMensagemErro1);
@@ -106,36 +104,46 @@ public class TelaConversor {
 
 				try {
 
-
 					String celsius = textCelsius.getText();
 					// criando uma variavel para guardar o valor em double
 					double celsiusDouble = Double.parseDouble(celsius);
 
-					// criando um objeto
-					Temperatura temperatura = new Temperatura();
-
-					temperatura.setCelsius(celsiusDouble); // utiliza a classe temperatura para realizar o calculo
-
-					double temperaturaKelvin = temperatura.converterParaKelvin(); // pega o valor comvertido e guarda no
-																					// temperaturaKelvin
-
 					/*
-					 * passa o resultado para o labelResultado 
-					 * o %.2f serve para deixa o resultado com apenas 2 casas decimais
+					 * utilizei o if e else para ele só calcular se o numero for maior ou igual a
+					 * -273.15 que é o zero absoluto
+					 * 
+					 * 
+					 * passa o resultado para o labelResultado o %.2f serve para deixa o resultado
+					 * com apenas 2 casas decimais
 					 */
-					if (temperatura.getCelsius() >= 273.15) {
-						
+					if (celsiusDouble >= -273.15) {
+
+						// criando um objeto
+						Temperatura temperatura = new Temperatura();
+
+						temperatura.setCelsius(celsiusDouble); // utiliza a classe temperatura para realizar o calculo
+
+						double temperaturaKelvin = temperatura.converterParaKelvin(); // pega o valor comvertido e
+																						// guarda no
+																						// temperaturaKelvin
+
+						/*
+						 * passa o resultado para o labelResultado o %.2f serve para deixa o resultado
+						 * com apenas 2 casas decimais seleciona onde o labelResultado vai aparecer
+						 */
 						labelResultado.setText(String.format("%.2f", temperaturaKelvin) + " Kelvin");
 						labelResultado.setBounds(120, 180, 360, 50);
 
-						// torna o resultado visivel
+						// torna o resultado visivel e a mensagem de erro some
 						labelResultado.setVisible(true);
-						
-						
-					} else { labelMensagemErro.setText("O valor deve ser acima ou igual a -273.15");
-						labelMensagemErro.setVisible(true);
+						labelMensagemErro.setVisible(false);
+						labelMensagemErro1.setVisible(false);
+					} else {
+						labelMensagemErro.setText(" O valor minímo é -273.15");
+						labelResultado.setVisible(false); // faz o resultado que já estiver sumir
+						labelMensagemErro.setVisible(true); // faz aparecer a mensagem de erro
+						labelMensagemErro1.setVisible(false); // faz sumir o erro da ,
 					}
-
 
 					// se for falso (erro)
 				} catch (NumberFormatException exception) {
@@ -154,24 +162,35 @@ public class TelaConversor {
 		});
 
 		// mesma coisa que a parte de cima, porem agora para o Fahreinheit
-		buttonFahreinheit.addActionListener(new ActionListener() {
+		buttonFahrenheit.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				try {
 
-
 					String celsius = textCelsius.getText();
 					double celsiusDouble = Double.parseDouble(celsius);
 
-					Temperatura temperatura = new Temperatura();
-					temperatura.setCelsius(celsiusDouble);
+					if (celsiusDouble >= -273.15) {
 
-					double temperaturaFahreinheit = temperatura.converterParaFahreinheit();
-					labelResultado.setText(String.format("%.2f", temperaturaFahreinheit) + " Fahreinheit");
-					labelResultado.setBounds(120, 180, 360, 50);
-					labelResultado.setVisible(true);
+						Temperatura temperatura = new Temperatura();
+
+						temperatura.setCelsius(celsiusDouble);
+
+						double temperaturaFahrenheit = temperatura.converterParaFahrenheit();
+
+						labelResultado.setText(String.format("%.2f", temperaturaFahrenheit) + " Fahrenheit");
+						labelResultado.setBounds(120, 180, 360, 50);
+						labelResultado.setVisible(true); // faz aparecer o resultado
+						labelMensagemErro.setVisible(false); // faz sumir a mensagem de erro
+						labelMensagemErro1.setVisible(false); // faz sumir a outra mensagem de erro
+					} else {
+						labelMensagemErro.setText(" O valor minímo é -273.15");
+						labelResultado.setVisible(false); // faz o resultado que já estiver sumir
+						labelMensagemErro.setVisible(true); // faz aparecer a mensagem de erro do -273.15
+						labelMensagemErro1.setVisible(false);
+					}
 
 				} catch (NumberFormatException exception) {
 

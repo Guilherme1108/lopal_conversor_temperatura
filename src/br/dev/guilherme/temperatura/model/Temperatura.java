@@ -10,7 +10,7 @@ public class Temperatura {
 
 	public void setCelsius(double celsius) {
 		
-		if (celsius >= 273.15) {
+		if (celsius >= -273.15) {
 			this.celsius = celsius;
 		}
 		}
@@ -23,9 +23,9 @@ public class Temperatura {
 	}
 
 	// realizando o calculo de celcius para fahreinheit
-	public double converterParaFahreinheit() {
-		double fahreinheit = (getCelsius() * 9 / 5) + 32;
-		return fahreinheit;
+	public double converterParaFahrenheit() {
+		double fahrenheit = (getCelsius() * 9 / 5) + 32;
+		return fahrenheit;
 	}
 
 }
