@@ -68,7 +68,7 @@ public class TelaConversor {
 		labelMensagemErro = new JLabel("Os dados estão incorretos.");
 
 		// cria uma fonte para o erro
-		Font tamanhoFonteMensagemErro = new Font(null, Font.BOLD, 20); // Cria uma estilização de fonte
+		Font tamanhoFonteMensagemErro = new Font(null, Font.BOLD, 18); // Cria uma estilização de fonte
 		labelMensagemErro.setVisible(false); // Define que não é visivel no momento
 		labelMensagemErro.setForeground(Color.RED); // Define a cor da letra
 		labelMensagemErro.setFont(tamanhoFonteMensagemErro); // faz o a mensagem de erro utilizar a fonte
@@ -76,7 +76,7 @@ public class TelaConversor {
 
 		labelMensagemErro1 = new JLabel("Utilize somente números e pontos."); // mensagem de erro da linha de baixo
 		// configurando a mensagem de erro de baixo
-		Font tamanhoFonteMensagemErro1 = new Font(null, Font.BOLD, 20); // Cria uma estilização de fonte
+		Font tamanhoFonteMensagemErro1 = new Font(null, Font.BOLD, 18); // Cria uma estilização de fonte
 		labelMensagemErro1.setVisible(false); // Define que não é visivel no momento
 		labelMensagemErro1.setForeground(Color.RED); // Define a cor da letra
 		labelMensagemErro1.setFont(tamanhoFonteMensagemErro1); // faz o a mensagem de erro utilizar a fonte
@@ -147,6 +147,8 @@ public class TelaConversor {
 
 					// se for falso (erro)
 				} catch (NumberFormatException exception) {
+					
+					labelMensagemErro.setText(" Os dados estão incorretos");//formatando a mensagem de label erro para está mensagem de erro novamente
 
 					// remove o resultado
 					labelResultado.setVisible(false);
@@ -193,6 +195,8 @@ public class TelaConversor {
 					}
 
 				} catch (NumberFormatException exception) {
+					
+					labelMensagemErro.setText(" Os dados estão incorretos");
 
 					labelResultado.setVisible(false);
 					labelMensagemErro.setVisible(true);
